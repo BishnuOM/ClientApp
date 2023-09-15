@@ -1,0 +1,9 @@
+export const GET_USER_BY_ID = 'GetUserById';
+export const ADD_STRIPECUSTOMER_ID = 'AddStripeCustomerId';
+export const UPDATE_STRIPECUSTOMER_ID = 'updateUserDetails';
+export const GET_PAYMENTMETHOD_LIST = 'getPaymentMethodList';
+export const ADD_PAYMENTMETHOD='addPaymentMethod';
+export const DELETE_PAYMENTMETHOD = 'deletePaymentMethod';
+export const GET_PAYMENTMETHOD = 'GetPaymentMethod';
+export const UPDATE_PAYMENTMETHOD = 'UpdatePaymentMethod';
+export const SET_PAYMENTMETHOD_ID = 'SetPaymentMethodId';

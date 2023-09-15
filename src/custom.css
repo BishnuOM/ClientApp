@@ -1,0 +1,58 @@
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #E01A76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+.chat_image{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.profile-img {
+    width: 113px;
+    height: 113px;
+    border-radius: 100%;
+}
+input[type="file"] {
+  display: none;
+}
+
+.chatlist_card{
+  border: 1px solid gray;
+  border-radius: 30px;
+  width: 50%;
+}
+.active_chatmembr{
+  border-left: 3px solid green;
+}
+body::-webkit-scrollbar {
+  width: 8px;               /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #e1e4e8;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid transparent;  /* creates padding around scroll thumb */
+}
+
+div::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px #f8fbff;
+  border-radius: 25px;
+   }
+  
+  div::-webkit-scrollbar-thumb {
+  background-color: #e1e4e8;    /* color of the scroll thumb */
+  border-radius: 25px;
+  }
+  div::-webkit-scrollbar {
+  width: 0.5em;
+  border-radius: 25px;
+  }

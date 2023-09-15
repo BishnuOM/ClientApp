@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="/css/site.css" asp-append-version="true" />
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/auth.js"></script>
+    <!--<script type="text/javascript" src="/js/teamsapp.js"></script>-->
+    <!--<script type="text/javascript" src="https://statics.teams.cdn.office.net/sdk/v1.8.0/js/MicrosoftTeams.min.js" integrity="sha384-5ilKjPffKMvf1YelNqWjOhy5WJC9rkHpgF9pASMY/eRFlb619wOrCGMVIg/a/71o" crossorigin="anonymous"></script>-->
+</head>
+<body>
+
+    <script type="text/javascript">
+       
+        var url = new URL(window.location.href);
+        var clientId = url.searchParams.get("clientId");
+        //let clientId ="6d5e92a7-28dd-4894-95d9-8b0f1112795a";
+        if (clientId != undefined && clientId != null && clientId !== '') {
+            //microsoftTeams.initialize();
+            //// Tab context - Navigate to Azure AD login page
+            //microsoftTeams.getContext(function (context) {
+                // Generate GUID state string and store it, so we can verify it in the callback
+                //var tid = context.tid;
+                //tid = tid.slice(24, 36) + "_accesstokentime";
+            let state = _guid();
+            //alert(state)
+                localStorage.setItem("simple.state", state);
+                localStorage.removeItem("simple.error");
+                localStorage.removeItem("access_token");
+                localStorage.removeItem("accesstokentime");
+                localStorage.removeItem(tid);
+                 let queryParams = {
+                    client_id: clientId,
+                    response_type: "code",
+                    response_mode: "fragment",
+                    resource: "https://graph.microsoft.com/",
+                    redirect_uri: window.location.origin + "/AuthEnd.html",
+                    nonce: _guid(),
+                    state: state,
+                    //login_hint: context.upn,
+                    scope:"openid offline_access"
+                };
+                
+                // AzureAD authorization endpoint
+                let authorizeEndpoint = "https://login.microsoftonline.com/common/oauth2/authorize?" + toQueryString(queryParams);
+                
+
+                window.location.assign(authorizeEndpoint);
+            //});
+        }
+
+
+        // QueryString
+        function toQueryString(queryParams) {
+            let encodedQueryParams = [];
+            for (let key in queryParams) {
+                encodedQueryParams.push(
+                    key + "=" + encodeURIComponent(queryParams[key])
+                );
+            }
+            return encodedQueryParams.join("&");
+        }
+
+
+        function _decimalToHex(number) {
+            let hex = number.toString(16);
+            while (hex.length < 2) {
+                hex = "0" + hex;
+            }
+            return hex;
+        }
+
+
+
+        function _guid() {
+            let cryptoObj = window.crypto || window.msCrypto; // for IE 11
+            if (cryptoObj && cryptoObj.getRandomValues) {
+                let buffer = new Uint8Array(16);
+                cryptoObj.getRandomValues(buffer);
+
+                buffer[6] |= 0x40;
+                buffer[6] &= 0x4f;
+                buffer[8] |= 0x80;
+                buffer[8] &= 0xbf;
+                return (
+                    _decimalToHex(buffer[0]) +
+                    _decimalToHex(buffer[1]) +
+                    _decimalToHex(buffer[2]) +
+                    _decimalToHex(buffer[3]) +
+                    "-" +
+                    _decimalToHex(buffer[4]) +
+                    _decimalToHex(buffer[5]) +
+                    "-" +
+                    _decimalToHex(buffer[6]) +
+                    _decimalToHex(buffer[7]) +
+                    "-" +
+                    _decimalToHex(buffer[8]) +
+                    _decimalToHex(buffer[9]) +
+                    "-" +
+                    _decimalToHex(buffer[10]) +
+                    _decimalToHex(buffer[11]) +
+                    _decimalToHex(buffer[12]) +
+                    _decimalToHex(buffer[13]) +
+                    _decimalToHex(buffer[14]) +
+                    _decimalToHex(buffer[15])
+                );
+            } else {
+                let guidHolder = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
+                let hex = "0123456789abcdef";
+                let r = 0;
+                let guidResponse = "";
+                for (let i = 0; i < 36; i++) {
+                    if (guidHolder[i] !== "-" && guidHolder[i] !== "4") {
+                        r = (Math.random() * 16) | 0;
+                    }
+                    if (guidHolder[i] === "x") {
+                        guidResponse += hex[r];
+                    } else if (guidHolder[i] === "y") {
+                        r &= 0x3;
+                        r |= 0x8;
+                        guidResponse += hex[r];
+                    } else {
+                        guidResponse += guidHolder[i];
+                    }
+                }
+                return guidResponse;
+            }
+        }
+    </script>
+  
+</body>
+</html>

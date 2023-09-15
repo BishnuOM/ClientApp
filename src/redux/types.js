@@ -1,0 +1,16 @@
+
+const type = {
+    //BILLING
+    GET_USER_BYID :"GET_USER_BYID",
+
+    //Modals
+    TOGGLE_MODAL:"TOGGLE_MODAL",
+
+    //Ring
+    SET_RING_DETAIL:'SET_RING_DETAIL',
+    MESSAGE_LIST:'MESSAGE_LIST',
+    UPDATE_MESSAGE_LIST:'UPDATE_MESSAGE_LIST',
+    SET_CHAT_STAGE:'SET_CHAT_STAGE'
+ };
+ export default type;
+ 
